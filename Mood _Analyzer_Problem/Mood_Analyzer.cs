@@ -19,7 +19,7 @@ namespace Mood_Analyzer_Problem
             {
                 return "SAD";
             }
-            return null;
+            return "HAPPY";
         }
     }
 }
