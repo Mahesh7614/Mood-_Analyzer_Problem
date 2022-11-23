@@ -16,7 +16,7 @@ namespace Mood_Analyzer_Test
         public void Given_Sad_Return_Sad()
         {
             Mood_Analyzer mood = new Mood_Analyzer();
-            string result = mood.AnalyzeMood("SAD");
+            string result = mood.AnalyzeMood("I am in Sad Mood");
 
             Assert.AreEqual("Sad".ToUpper(), result);
         }
