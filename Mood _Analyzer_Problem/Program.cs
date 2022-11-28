@@ -8,8 +8,8 @@ namespace Mood__Analyzer_Problem
         {
             Console.WriteLine("Enter String to check Mood");
             string mood = Console.ReadLine();
-            Mood_Analyzer analyzer = new Mood_Analyzer();
-            analyzer.AnalyzeMood(mood);
+            Mood_Analyzer analyzer = new Mood_Analyzer(mood);
+            analyzer.AnalyzeMood();
         }
     }
 }

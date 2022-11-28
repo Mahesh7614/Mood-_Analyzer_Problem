@@ -1,11 +1,15 @@
-﻿using System;
-using System.Text;
-
+﻿
 namespace Mood_Analyzer_Problem
 {
     public class Mood_Analyzer
     {
-        public string AnalyzeMood(string message)
+        string message;
+        public Mood_Analyzer() { }
+        public Mood_Analyzer(string message)
+        {
+            this.message = message;
+        }
+        public string AnalyzeMood()
         {
             bool result1 = message.Contains("Happy", StringComparison.OrdinalIgnoreCase);
 
