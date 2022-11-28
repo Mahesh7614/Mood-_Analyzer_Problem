@@ -20,5 +20,13 @@ namespace Mood_Analyzer_Test
 
             Assert.AreEqual("Happy".ToUpper(), result);
         }
+        [TestMethod]
+        public void Given_Null_Return_Happy()
+        {
+            Mood_Analyzer mood = new Mood_Analyzer(null);
+            string result = mood.AnalyzeMood();
+
+            Assert.AreEqual("Happy".ToUpper(), result);
+        }
     }
 }
