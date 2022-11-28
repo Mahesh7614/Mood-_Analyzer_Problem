@@ -1,3 +1,4 @@
+using Mood__Analyzer_Problem;
 using Mood_Analyzer_Problem;
 namespace Mood_Analyzer_Test
 {
@@ -27,6 +28,34 @@ namespace Mood_Analyzer_Test
             string result = mood.AnalyzeMood();
 
             Assert.AreEqual("Happy".ToUpper(), result);
+        }
+        [TestMethod]
+        public void Given_Null_Throw_MoodAnalserException()
+        {
+            try
+            {
+                Mood_Analyzer mood = new Mood_Analyzer(null);
+                string result = mood.AnalyzeMood();
+            }
+            catch (ExceptionTest ex)
+            {
+                Assert.AreEqual("Mood Should not be Null", ex.Message);
+            }
+
+        }
+        [TestMethod]
+        public void Given_Empty_Throw_MoodAnalserException()
+        {
+            try
+            {
+                Mood_Analyzer mood = new Mood_Analyzer("");
+                string result = mood.AnalyzeMood();
+            }
+            catch (ExceptionTest ex)
+            {
+                Assert.AreEqual("Mood Should not be Empty", ex.Message);
+            }
+
         }
     }
 }

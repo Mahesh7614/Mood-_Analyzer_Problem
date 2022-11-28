@@ -1,4 +1,6 @@
 ﻿
+using Mood__Analyzer_Problem;
+
 namespace Mood_Analyzer_Problem
 {
     public class Mood_Analyzer
@@ -13,6 +15,11 @@ namespace Mood_Analyzer_Problem
         {
             try
             {
+                if (this.message.Equals(string.Empty))
+                {
+                    throw new ExceptionTest(ExceptionTest.ExceptionType.EMPTY_MESSAGE, "Mood Should not be Empty");
+                }
+
                 bool result1 = message.Contains("Happy", StringComparison.OrdinalIgnoreCase);
 
                 if (result1)
@@ -24,9 +31,10 @@ namespace Mood_Analyzer_Problem
                     return "SAD";
                 }
             }
-            catch
-            { 
-                return "HAPPY";
+            catch(NullReferenceException)
+            {
+                throw new ExceptionTest(ExceptionTest.ExceptionType.EMPTY_MESSAGE, "Mood Should not be Empty");
+
             }
         }
     }
