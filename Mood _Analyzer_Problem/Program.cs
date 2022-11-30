@@ -1,6 +1,6 @@
 ﻿using Mood_Analyzer_Problem;
 
-namespace Mood__Analyzer_Problem
+namespace Mood_Analyzer_Problem
 {
     public class Program
     {
