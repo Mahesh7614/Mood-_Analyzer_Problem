@@ -1,5 +1,8 @@
 using Mood__Analyzer_Problem;
 using Mood_Analyzer_Problem;
+using Newtonsoft.Json;
+using System.Xml.Linq;
+using System;
 
 namespace Mood_Analyzer_Test
 {
@@ -72,6 +75,20 @@ namespace Mood_Analyzer_Test
             object actual = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer", "Mood_Analyer");
 
             Assert.AreEqual("Constructor Not Found", actual);
+        }
+
+        // TC - 5.1
+        [TestMethod]
+        public void Given_MoodAnalyserClass_return_MoodAnalyserObject_Using_ParameterizedConstructor()
+        {
+            string className = "Mood_Analyzer_Problem.Mood_Analyzer";
+            string constructorName = "Mood_Analyzer";
+            object expected = new Mood_Analyzer("Happy");
+            object actual = MoodAnalyserFactory.CreateMoodAnalyserObject(className, constructorName, "Happy");
+            //string exp = JsonConvert.SerializeObject(expected);
+            //string act = JsonConvert.SerializeObject(actual);
+            Assert.AreEqual(expected, actual);
+            //expected.Equals(actual);
         }
     }
 }
