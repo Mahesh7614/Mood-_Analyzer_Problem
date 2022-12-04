@@ -1,11 +1,7 @@
-﻿
-using Mood_Analyzer_Problem;
-using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Xml.Linq;
 
-namespace Mood__Analyzer_Problem
+namespace Mood_Analyzer_Problem
 {
 
     public class MoodAnalyserFactory
@@ -34,7 +30,7 @@ namespace Mood__Analyzer_Problem
                 {
                     if (moodAnalyserType.Name != constructorName)
                     {
-                        throw new ExceptionTest(ExceptionTest.ExceptionType.NO_SUCH_CLASS, "Constructor Not Found");
+                        throw new ExceptionTest(ExceptionTest.ExceptionType.NO_SUCH_CONSTRUCTOR, "Constructor Not Found");
                     }
                 }
                 if (message != null)
@@ -43,9 +39,28 @@ namespace Mood__Analyzer_Problem
                     object[] parameters = { message };
                     return ctor.Invoke(new object[] { message });
                 }
-                return moodAnalyserType;
+                return Activator.CreateInstance(moodAnalyserType);
             }
             catch (ExceptionTest ex)
+            {
+                return ex.Message;
+            }
+        }
+        public static object InvokeAnalyseMood(string messasge, string methodName)
+        {
+            Type moodAnalyserType = Type.GetType("Mood_Analyzer_Problem.Mood_Analyzer");
+            try
+            {
+                object moodAnalyserObject = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer", "Mood_Analyzer", messasge);
+                MethodInfo analyseMoodMethod = moodAnalyserType.GetMethod(methodName);
+                if (analyseMoodMethod == null)
+                {
+                    throw new ExceptionTest(ExceptionTest.ExceptionType.NO_SUCH_METHOD, "Method Not Found");
+                }
+                object mood = analyseMoodMethod.Invoke(moodAnalyserObject, null);
+                return mood;
+            }
+            catch(ExceptionTest ex)
             {
                 return ex.Message;
             }

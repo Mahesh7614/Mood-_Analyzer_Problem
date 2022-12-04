@@ -1,12 +1,12 @@
 ﻿
-namespace Mood__Analyzer_Problem
+namespace Mood_Analyzer_Problem
 {
     public class ExceptionTest : Exception
     {
         private readonly ExceptionType type;
         public enum ExceptionType
         {
-            NULL_MESSAGE, EMPTY_MESSAGE,NO_SUCH_CLASS,NO_SUCH_METHOD
+            NULL_MESSAGE, EMPTY_MESSAGE,NO_SUCH_CLASS,NO_SUCH_METHOD, NO_SUCH_CONSTRUCTOR
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="ExceptionTest"/> class.

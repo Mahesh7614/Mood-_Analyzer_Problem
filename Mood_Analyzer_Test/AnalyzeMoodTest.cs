@@ -1,8 +1,6 @@
-using Mood__Analyzer_Problem;
 using Mood_Analyzer_Problem;
 using Newtonsoft.Json;
-using System.Xml.Linq;
-using System;
+using System.Reflection;
 
 namespace Mood_Analyzer_Test
 {
@@ -58,8 +56,10 @@ namespace Mood_Analyzer_Test
         public void Given_MoodAnalyserClassName_return_MoodAnalyserObject()
         {
             Mood_Analyzer expected = new Mood_Analyzer();
+            string exp = JsonConvert.SerializeObject(expected);
             object actual = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer");
-            Assert.IsInstanceOfType(expected, (Type)actual);
+            string act = JsonConvert.SerializeObject(actual);
+            Assert.AreEqual(exp, act);
         }
         // TC - 4.2
         [TestMethod]
@@ -99,6 +99,20 @@ namespace Mood_Analyzer_Test
         {
             object actual = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer", "Mood_Analyer", "Happy");
             Assert.AreEqual("Constructor Not Found", actual);
+        }
+        // TC - 6.1
+        [TestMethod]
+        public void Given_Happy_return_HappyMood_Using_Invoke()
+        {
+            object actual = MoodAnalyserFactory.InvokeAnalyseMood("Happy", "AnalyzeMood");
+            Assert.AreEqual("Happy".ToUpper(), actual.ToString());
+        }
+        // TC - 6.2
+        [TestMethod]
+        public void Given_MethodNameImproper_Throw_Exception()
+        {
+            object actual = MoodAnalyserFactory.InvokeAnalyseMood("Happy", "Analyzeood");
+            Assert.AreEqual("Method Not Found", actual.ToString());
         }
     }
 }

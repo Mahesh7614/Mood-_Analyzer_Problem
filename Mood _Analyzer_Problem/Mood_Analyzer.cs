@@ -1,5 +1,5 @@
 ﻿
-using Mood__Analyzer_Problem;
+using Mood_Analyzer_Problem;
 
 namespace Mood_Analyzer_Problem
 {
