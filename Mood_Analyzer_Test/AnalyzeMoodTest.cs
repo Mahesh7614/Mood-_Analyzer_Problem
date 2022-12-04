@@ -59,7 +59,7 @@ namespace Mood_Analyzer_Test
         {
             Mood_Analyzer expected = new Mood_Analyzer();
             object actual = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer");
-            expected.Equals(actual);
+            Assert.IsInstanceOfType(expected, (Type)actual);
         }
         // TC - 4.2
         [TestMethod]
@@ -76,19 +76,29 @@ namespace Mood_Analyzer_Test
 
             Assert.AreEqual("Constructor Not Found", actual);
         }
-
         // TC - 5.1
         [TestMethod]
         public void Given_MoodAnalyserClass_return_MoodAnalyserObject_Using_ParameterizedConstructor()
         {
-            string className = "Mood_Analyzer_Problem.Mood_Analyzer";
-            string constructorName = "Mood_Analyzer";
             object expected = new Mood_Analyzer("Happy");
-            object actual = MoodAnalyserFactory.CreateMoodAnalyserObject(className, constructorName, "Happy");
-            //string exp = JsonConvert.SerializeObject(expected);
-            //string act = JsonConvert.SerializeObject(actual);
-            Assert.AreEqual(expected, actual);
-            //expected.Equals(actual);
+            string exp = JsonConvert.SerializeObject(expected);
+            object actual = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer", "Mood_Analyzer", "Happy");
+            string act = JsonConvert.SerializeObject(actual);
+            Assert.AreEqual(exp, act);
+        }
+        // TC - 5.2
+        [TestMethod]
+        public void Given_ClassNameImproper_Throw_Exception_Using_ParameterizedConstructor()
+        {
+            object actual = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analzer", "Mood_Analyzer", "Happy");
+            Assert.AreEqual("Class Not Found", actual);
+        }
+        // TC - 5.3
+        [TestMethod]
+        public void Given_ConstructorNameImproper_Throw_Exception_Using_ParameterizedConstructor()
+        {
+            object actual = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer", "Mood_Analyer", "Happy");
+            Assert.AreEqual("Constructor Not Found", actual);
         }
     }
 }
