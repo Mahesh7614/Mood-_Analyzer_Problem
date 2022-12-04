@@ -5,7 +5,7 @@ namespace Mood_Analyzer_Problem
 {
     public class Mood_Analyzer
     {
-        string message;
+        public string message { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Mood_Analyzer"/> class.
         /// </summary>

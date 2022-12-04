@@ -46,12 +46,12 @@ namespace Mood_Analyzer_Problem
                 return ex.Message;
             }
         }
-        public static object InvokeAnalyseMood(string messasge, string methodName)
+        public static object InvokeAnalyseMood(string message, string methodName)
         {
             Type moodAnalyserType = Type.GetType("Mood_Analyzer_Problem.Mood_Analyzer");
             try
             {
-                object moodAnalyserObject = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer", "Mood_Analyzer", messasge);
+                object moodAnalyserObject = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer", "Mood_Analyzer", message);
                 MethodInfo analyseMoodMethod = moodAnalyserType.GetMethod(methodName);
                 if (analyseMoodMethod == null)
                 {
@@ -60,7 +60,33 @@ namespace Mood_Analyzer_Problem
                 object mood = analyseMoodMethod.Invoke(moodAnalyserObject, null);
                 return mood;
             }
-            catch(ExceptionTest ex)
+            catch (ExceptionTest ex)
+            {
+                return ex.Message;
+            }
+        }
+        public static string SetField(string message, string propertyName)
+        {
+            Type moodAnalyserType = Type.GetType("Mood_Analyzer_Problem.Mood_Analyzer");
+            object moodAnalyserObject = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyzer_Problem.Mood_Analyzer");
+            try
+            {
+                PropertyInfo property = moodAnalyserType.GetProperty(propertyName);
+                if (message == null)
+                {
+                    throw new ExceptionTest(ExceptionTest.ExceptionType.NULL_MESSAGE, "Message Should not be Null");
+
+                }
+                if (property == null)
+                {
+                    throw new ExceptionTest(ExceptionTest.ExceptionType.NO_SUCH_FIELD, "Field Not Found");
+
+                }
+                property.SetValue(moodAnalyserObject, message);
+                object analyseMood = InvokeAnalyseMood(message, "AnalyzeMood");
+                return analyseMood.ToString();
+            }
+            catch (ExceptionTest ex)
             {
                 return ex.Message;
             }

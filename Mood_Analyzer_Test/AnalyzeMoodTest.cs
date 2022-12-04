@@ -114,5 +114,26 @@ namespace Mood_Analyzer_Test
             object actual = MoodAnalyserFactory.InvokeAnalyseMood("Happy", "Analyzeood");
             Assert.AreEqual("Method Not Found", actual.ToString());
         }
+        // TC - 7.1
+        [TestMethod]
+        public void Set_FieldHappyMessage_return_Happy()
+        {
+            string actual = MoodAnalyserFactory.SetField("Happy", "message");
+            Assert.AreEqual("Happy".ToUpper(), actual);
+        }
+        // TC - 7.2
+        [TestMethod]
+        public void Set_FieldNameImproper_Throw_Exception()
+        {
+            string actual = MoodAnalyserFactory.SetField("Happy", "messge");
+            Assert.AreEqual("Field Not Found", actual);
+        }
+        // TC - 7.3
+        [TestMethod]
+        public void Set_FieldNull_Throw_Exception()
+        {
+            string actual = MoodAnalyserFactory.SetField(null, "messge");
+            Assert.AreEqual("Message Should not be Null", actual);
+        }
     }
 }
